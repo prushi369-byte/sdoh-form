@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Determinants of Health Form</title>
+    <style>
+        /* Basic page styling for readability */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.5;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            text-align: center;
+        }
+        fieldset {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+        }
+        legend {
+            font-weight: bold;
+            padding: 0 5px;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: 600;
+        }
+        select, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        textarea {
+            resize: vertical;
+            min-height: 60px;
+        }
+        .print-button {
+            display: block;
+            margin: 30px auto;
+            padding: 10px 20px;
+            font-size: 1rem;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .print-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Social Determinants of Health Checklist</h1>
+    <form id="sdoh-form">
+        <!-- Housing Section -->
+        <fieldset>
+            <legend>Housing</legend>
+            <label for="housing-status">Housing status</label>
+            <select id="housing-status" name="housing-status" required>
+                <option value="" disabled selected>Select an option</option>
+                <option value="Stable housing">Stable housing</option>
+                <option value="Risk of eviction">Risk of eviction</option>
+                <option value="Homeless or staying in shelter">Homeless or staying in shelter</option>
+                <option value="Unsafe housing (mold, pests, utilities off)">Unsafe housing (mold, pests, utilities off)</option>
+            </select>
+            <label for="housing-notes">Additional notes (optional)</label>
+            <textarea id="housing-notes" name="housing-notes" placeholder="Describe any other housing concerns..."></textarea>
+        </fieldset>
+
+        <!-- Food Section -->
+        <fieldset>
+            <legend>Food</legend>
+            <label for="food-status">Food security</label>
+            <select id="food-status" name="food-status" required>
+                <option value="" disabled selected>Select an option</option>
+                <option value="Enough food at home">Enough food at home</option>
+                <option value="Sometimes run out of food">Sometimes run out of food</option>
+                <option value="Often run out of food">Often run out of food</option>
+                <option value="Needs help accessing food programs">Needs help accessing food programs</option>
+            </select>
+            <label for="food-notes">Additional notes (optional)</label>
+            <textarea id="food-notes" name="food-notes" placeholder="Describe any other food concerns..."></textarea>
+        </fieldset>
+
+        <!-- Transportation Section -->
+        <fieldset>
+            <legend>Transportation</legend>
+            <label for="transportation-status">Transportation access</label>
+            <select id="transportation-status" name="transportation-status" required>
+                <option value="" disabled selected>Select an option</option>
+                <option value="Reliable transportation">Reliable transportation</option>
+                <option value="Missing appointments due to transportation">Missing appointments due to transportation</option>
+                <option value="Needs help with transit/ride programs">Needs help with transit/ride programs</option>
+            </select>
+            <label for="transportation-notes">Additional notes (optional)</label>
+            <textarea id="transportation-notes" name="transportation-notes" placeholder="Describe any other transportation concerns..."></textarea>
+        </fieldset>
+
+        <!-- Financial Strain Section -->
+        <fieldset>
+            <legend>Financial Strain</legend>
+            <label for="financial-status">Ability to pay bills</label>
+            <select id="financial-status" name="financial-status" required>
+                <option value="" disabled selected>Select an option</option>
+                <option value="Able to pay bills">Able to pay bills</option>
+                <option value="Hard to pay bills">Hard to pay bills</option>
+                <option value="Unable to pay rent/utilities/medications">Unable to pay rent/utilities/medications</option>
+                <option value="Needs help with benefits/resources">Needs help with benefits/resources</option>
+            </select>
+            <label for="financial-notes">Additional notes (optional)</label>
+            <textarea id="financial-notes" name="financial-notes" placeholder="Describe any other financial concerns..."></textarea>
+        </fieldset>
+
+        <!-- Utilities Section -->
+        <fieldset>
+            <legend>Utilities</legend>
+            <label for="utilities-status">Utility situation</label>
+            <select id="utilities-status" name="utilities-status" required>
+                <option value="" disabled selected>Select an option</option>
+                <option value="Utilities working">Utilities working</option>
+                <option value="Risk of shutoff">Risk of shutoff</option>
+                <option value="Shutoff in past 12 months">Shutoff in past 12 months</option>
+                <option value="Needs utility assistance">Needs utility assistance</option>
+            </select>
+            <label for="utilities-notes">Additional notes (optional)</label>
+            <textarea id="utilities-notes" name="utilities-notes" placeholder="Describe any other utility concerns..."></textarea>
+        </fieldset>
+
+        <!-- Safety Section -->
+        <fieldset>
+            <legend>Safety</legend>
+            <label for="safety-status">Personal safety</label>
+            <select id="safety-status" name="safety-status" required>
+                <option value="" disabled selected>Select an option</option>
+                <option value="Feels safe at home">Feels safe at home</option>
+                <option value="Concerns about violence at home">Concerns about violence at home</option>
+                <option value="Concerns about violence in neighborhood">Concerns about violence in neighborhood</option>
+                <option value="Needs IPV resources">Needs IPV resources</option>
+            </select>
+            <label for="safety-notes">Additional notes (optional)</label>
+            <textarea id="safety-notes" name="safety-notes" placeholder="Describe any other safety concerns..."></textarea>
+        </fieldset>
+
+        <!-- Social Support Section -->
+        <fieldset>
+            <legend>Social Support</legend>
+            <label for="support-status">Support network</label>
+            <select id="support-status" name="support-status" required>
+                <option value="" disabled selected>Select an option</option>
+                <option value="Has family/friends for support">Has family/friends for support</option>
+                <option value="Limited support">Limited support</option>
+                <option value="Socially isolated">Socially isolated</option>
+                <option value="Needs help connecting with community services">Needs help connecting with community services</option>
+            </select>
+            <label for="support-notes">Additional notes (optional)</label>
+            <textarea id="support-notes" name="support-notes" placeholder="Describe any other social support concerns..."></textarea>
+        </fieldset>
+
+        <!-- Employment / Education Section -->
+        <fieldset>
+            <legend>Employment / Education</legend>
+            <label for="employment-status">Employment / education status</label>
+            <select id="employment-status" name="employment-status" required>
+                <option value="" disabled selected>Select an option</option>
+                <option value="Employed">Employed</option>
+                <option value="Unemployed">Unemployed</option>
+                <option value="Unsafe working conditions">Unsafe working conditions</option>
+                <option value="Needs GED/education resources">Needs GED/education resources</option>
+                <option value="Interested in job training">Interested in job training</option>
+            </select>
+            <label for="employment-notes">Additional notes (optional)</label>
+            <textarea id="employment-notes" name="employment-notes" placeholder="Describe any other employment or education concerns..."></textarea>
+        </fieldset>
+
+        <!-- Medication / Healthcare Access Section -->
+        <fieldset>
+            <legend>Medication / Healthcare Access</legend>
+            <label for="medication-status">Access to medication and healthcare</label>
+            <select id="medication-status" name="medication-status" required>
+                <option value="" disabled selected>Select an option</option>
+                <option value="Able to afford meds">Able to afford meds</option>
+                <option value="Difficulty affording meds">Difficulty affording meds</option>
+                <option value="Gaps in insurance">Gaps in insurance</option>
+                <option value="Needs help with insurance enrollment">Needs help with insurance enrollment</option>
+            </select>
+            <label for="medication-notes">Additional notes (optional)</label>
+            <textarea id="medication-notes" name="medication-notes" placeholder="Describe any other healthcare access concerns..."></textarea>
+        </fieldset>
+
+        <!-- Mental Health / Substance Use Section -->
+        <fieldset>
+            <legend>Mental Health / Substance Use</legend>
+            <label for="mental-health-status">Mental health / substance use</label>
+            <select id="mental-health-status" name="mental-health-status" required>
+                <option value="" disabled selected>Select an option</option>
+                <option value="Access to mental health care">Access to mental health care</option>
+                <option value="Stressed, anxious, or depressed">Stressed, anxious, or depressed</option>
+                <option value="Concerns about alcohol or drug use">Concerns about alcohol or drug use</option>
+                <option value="Wants referral for support">Wants referral for support</option>
+            </select>
+            <label for="mental-health-notes">Additional notes (optional)</label>
+            <textarea id="mental-health-notes" name="mental-health-notes" placeholder="Describe any other mental health or substance use concerns..."></textarea>
+        </fieldset>
+
+        <button type="button" class="print-button" onclick="window.print()">Print Completed Form</button>
+    </form>
+    <script>
+        // Placeholder for future JavaScript. Currently, printing uses the browser's built-in print dialog.
+    </script>
+</body>
+</html>
