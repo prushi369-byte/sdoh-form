@@ -127,6 +127,9 @@
         <button type="button" class="tab-button" onclick="openTab('tab-social-connection', this)">Social Connection</button>
         <button type="button" class="tab-button" onclick="openTab('tab-depression', this)">Depression</button>
         <button type="button" class="tab-button" onclick="openTab('tab-utilities', this)">Utilities</button>
+        <button type="button" class="tab-button" onclick="openTab('tab-health-care-financial-barrier', this)">Health Care Financial Barrier</button>
+        <button type="button" class="tab-button" onclick="openTab('tab-health-literacy', this)">Health Literacy</button>
+        <button type="button" class="tab-button" onclick="openTab('tab-summary', this)">Summary</button>
     </div>
     <form id="sdoh-form">
         <!-- Basic Info Tab -->
@@ -142,6 +145,15 @@
                     <option value="" disabled selected>Select</option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+                <label for="patient-insurance">Insurance</label>
+                <select id="patient-insurance" name="patient-insurance" required>
+                    <option value="" disabled selected>Select Insurance</option>
+                    <option value="Medicaid">Medicaid</option>
+                    <option value="Medicare">Medicare</option>
+                    <option value="Private">Private</option>
+                    <option value="Uninsured">Uninsured</option>
                     <option value="Other">Other</option>
                 </select>
             </fieldset>
@@ -342,6 +354,51 @@
                 <textarea id="utilities-notes" name="utilities-notes" placeholder="Describe any other utility concerns..."></textarea>
             </fieldset>
         </div>
+
+        <!-- Health Care Financial Barrier Tab -->
+        <div id="tab-health-care-financial-barrier" class="tab-content">
+            <fieldset>
+                <legend>Health Care Related Financial Barrier</legend>
+                <label for="health-care-financial-barrier-status">Barrier type</label>
+                <select id="health-care-financial-barrier-status" name="health-care-financial-barrier-status" required>
+                    <option value="" disabled selected>Select an option</option>
+                    <option value="Unable to afford medication">Unable to afford medication</option>
+                    <option value="Unable to afford imaging">Unable to afford imaging</option>
+                    <option value="Unable to afford follow-up">Unable to afford follow-up</option>
+                    <option value="Decline to specify">Decline to specify</option>
+                </select>
+                <label for="health-care-financial-barrier-notes">Additional notes (optional)</label>
+                <textarea id="health-care-financial-barrier-notes" name="health-care-financial-barrier-notes" placeholder="Describe any other financial barriers..."></textarea>
+            </fieldset>
+        </div>
+
+        <!-- Health Literacy Tab -->
+        <div id="tab-health-literacy" class="tab-content">
+            <fieldset>
+                <legend>Health Literacy</legend>
+                <label for="health-literacy-status">Ability to understand health information</label>
+                <select id="health-literacy-status" name="health-literacy-status" required>
+                    <option value="" disabled selected>Select an option</option>
+                    <option value="Understands health information easily">Understands health information easily</option>
+                    <option value="Sometimes needs help understanding health information">Sometimes needs help understanding health information</option>
+                    <option value="Often has difficulty understanding health information">Often has difficulty understanding health information</option>
+                    <option value="Uses translator or interpreter for health information">Uses translator or interpreter for health information</option>
+                    <option value="Decline to specify">Decline to specify</option>
+                </select>
+                <label for="health-literacy-notes">Additional notes (optional)</label>
+                <textarea id="health-literacy-notes" name="health-literacy-notes" placeholder="Describe any other health literacy concerns..."></textarea>
+            </fieldset>
+        </div>
+
+        <!-- Summary Tab -->
+        <div id="tab-summary" class="tab-content">
+            <fieldset>
+                <legend>Summary of Responses</legend>
+                <p>The information below summarizes the responses entered for each section. Review before printing.</p>
+                <pre id="summary-tab-pre"></pre>
+                <button type="button" class="print-button" onclick="printSummary()">Print Summary</button>
+            </fieldset>
+        </div>
         <button type="button" class="print-button" onclick="printSummary()">Print Summary</button>
     </form>
     <!-- Summary section (hidden until printing) -->
@@ -363,19 +420,35 @@
             if (target) {
                 target.classList.add('active');
             }
+
+            // If opening the summary tab, update the summary content
+            if (tabId === 'tab-summary') {
+                updateSummaryTab();
+            }
+        }
+        // Update the summary tab with the latest responses
+        function updateSummaryTab() {
+            const summaryText = generateSummary();
+            const summaryTabPre = document.getElementById('summary-tab-pre');
+            if (summaryTabPre) {
+                summaryTabPre.textContent = summaryText;
+            }
         }
         // Generate a summary of the questionnaire responses
         function generateSummary() {
             const initialElem = document.getElementById('patient-initial');
             const ageElem = document.getElementById('patient-age');
             const sexElem = document.getElementById('patient-sex');
+            const insuranceElem = document.getElementById('patient-insurance');
             const initial = initialElem ? initialElem.value : '';
             const age = ageElem ? ageElem.value : '';
             const sex = sexElem ? sexElem.value : '';
+            const insurance = insuranceElem ? insuranceElem.value : '';
             let summary = '';
             summary += 'Initials: ' + initial + '\n';
             summary += 'Age: ' + age + '\n';
-            summary += 'Sex: ' + sex + '\n\n';
+            summary += 'Sex: ' + sex + '\n';
+            summary += 'Insurance: ' + insurance + '\n\n';
             const sections = [
                 {id: 'smoking', label: 'Smoking'},
                 {id: 'finance', label: 'Finance'},
@@ -388,7 +461,9 @@
                 {id: 'physical-activity', label: 'Physical Activity'},
                 {id: 'social-connection', label: 'Social Connection'},
                 {id: 'depression', label: 'Depression'},
-                {id: 'utilities', label: 'Utilities'}
+                {id: 'utilities', label: 'Utilities'},
+                {id: 'health-care-financial-barrier', label: 'Health Care Financial Barrier'},
+                {id: 'health-literacy', label: 'Health Literacy'}
             ];
             sections.forEach(section => {
                 const selectElem = document.getElementById(section.id + '-status');
